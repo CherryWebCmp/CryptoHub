@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>CryptoHub UA — Майбутнє фінансів</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>₿</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #0d0d0f;
+      --card: #151518;
+      --text: #eaeaea;
+      --muted: #9a9a9a;
+      --accent: #6cf2c2;
+      --accent-2: #9af5d5;
+      --accent-hover: #8af0d0;
+      --border: #232326;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(1200px 600px at 50% -20%, #1c1c22, var(--bg));
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      padding: 40px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeDown 1s ease;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      background: rgba(13, 13, 15, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid transparent;
+      transition: padding 0.3s ease, border-color 0.3s ease;
+    }
+
+    header.scrolled {
+      padding: 25px 8%;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      transition: color 0.3s ease;
+      position: relative;
+      padding: 5px 0;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 180px 8% 120px;
+      text-align: center;
+      animation: fadeUp 1.2s ease;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 54px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      line-height: 1.2;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto 50px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-block;
+      padding: 16px 36px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #0d0d0f;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 40px rgba(108, 242, 194, 0.25);
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 60px rgba(108, 242, 194, 0.35);
+      background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(108, 242, 194, 0.1);
+      color: var(--accent);
+    }
+
+    .btn-small {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 100px 8%;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 70px;
+    }
+
+    .section-header h2 {
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    /* ===== CARDS ===== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #18181d, var(--card));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 35px;
+      transition: 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(to right, var(--accent), var(--accent-2));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline {
+      border-left: 2px solid var(--accent);
+      padding-left: 40px;
+      margin-top: 40px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -5px;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    .timeline-item {
+      margin-bottom: 40px;
+      position: relative;
+      padding: 20px;
+      background: rgba(21, 21, 24, 0.5);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(10px);
+      border-color: var(--accent);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -50px;
+      top: 30px;
+      width: 16px;
+      height: 16px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    /* ===== STATS ===== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      margin-top: 50px;
+    }
+
+    .stat-card {
+      background: linear-gradient(180deg, #18181d, var(--card));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      text-align: center;
+      transition: 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    /* ===== TABLE ===== */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 40px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: rgba(108, 242, 194, 0.1);
+      color: var(--accent);
+      font-weight: 600;
+      padding: 20px;
+      text-align: left;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    td {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    tr:hover {
+      background: rgba(108, 242, 194, 0.05);
+    }
+
+    /* ===== ACCORDION ===== */
+    .accordion {
+      margin-top: 40px;
+    }
+
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      background: var(--card);
+    }
+
+    .accordion-header {
+      padding: 25px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease;
+      background: rgba(21, 21, 24, 0.7);
+    }
+
+    .accordion-header:hover {
+      background: rgba(108, 242, 194, 0.05);
+    }
+
+    .accordion-icon {
+      transition: transform 0.3s ease;
+      color: var(--accent);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 25px;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .accordion-item.active .accordion-content {
+      max-height: 1000px;
+      padding: 25px;
+    }
+
+    .accordion-item.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 80px 8% 40px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      background: rgba(10, 10, 12, 0.8);
+    }
+
+    .footer-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .footer-logo span {
+      color: var(--accent);
+    }
+
+    .footer-disclaimer {
+      background: rgba(108, 242, 194, 0.05);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 30px;
+      margin-top: 50px;
+      text-align: left;
+      position: relative;
+    }
+
+    .footer-disclaimer h3 {
+      color: var(--accent);
+      margin-bottom: 15px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 30px 0 40px;
+    }
+
+    .socials a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    .socials a:hover {
+      color: var(--accent);
+    }
+
+    footer p {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .hero h1 {
+        font-size: 46px;
+      }
+      
+      section {
+        padding: 80px 5%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 25px 5%;
+      }
+      
+      .hero {
+        padding: 140px 5% 80px;
+      }
+      
+      .hero h1 {
+        font-size: 36px;
+      }
+      
+      .hero p {
+        font-size: 16px;
+      }
+      
+      .section-header h2 {
+        font-size: 32px;
+      }
+      
+      nav {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: var(--bg);
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        border-bottom: 1px solid var(--border);
+        animation: fadeDown 0.5s ease;
+      }
+      
+      nav.active {
+        display: flex;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .socials {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header id="header">
+  <div class="logo">Crypto<span>Hub</span> UA</div>
+  <nav id="nav">
+    <a href="#hero">Головна</a>
+    <a href="#about">Про крипту</a>
+    <a href="#blockchain">Блокчейн</a>
+    <a href="#types">Види</a>
+    <a href="#defi">DeFi</a>
+    <a href="#nft">NFT</a>
+    <a href="#start">Як почати</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <button class="mobile-menu-btn" id="mobileMenuBtn">
+    <i class="fas fa-bars"></i>
+  </button>
+</header>
+
+<section class="hero" id="hero">
+  <h1>Майбутнє цифрових фінансів — <span>Криптовалюти</span></h1>
+  <p>
+    Відкрийте для себе революційний світ цифрових активів. Криптовалюти змінюють уявлення про фінанси, 
+    пропонуючи децентралізацію, прозорість та фінансову свободу для кожного.
+  </p>
+  <a href="#about" class="btn">Дослідити світ крипти</a>
+</section>
+
+<section id="about">
+  <div class="section-header">
+    <h2>Що таке криптовалюта?</h2>
+    <p>Цифрові активи нового покоління, що працюють на основі блокчейн-технологій</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+      <h3>Децентралізація</h3>
+      <p>Відсутність центрального контролю. Мережа підтримується тисячами незалежних вузлів по всьому світу, що робить її стійкою до цензури та маніпуляцій.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+      <h3>Криптографічна безпека</h3>
+      <p>Усі транзакції захищені криптографічними алгоритмами. Публічний реєстр (блокчейн) забезпечує прозорість та неможливість шахрайства.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-globe"></i></div>
+      <h3>Глобальна доступність</h3>
+      <p>Доступ до криптовалют має будь-яка людина з інтернетом, незалежно від географічного розташування чи соціального статусу.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-university"></i></div>
+      <h3>Фінансова інклюзія</h3>
+      <p>Криптовалюти надають доступ до фінансових послуг мільярдам людей, які не мають доступу до традиційних банківських систем.</p>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">10,000+</div>
+      <p>Криптовалют на ринку</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">$1.8 трлн</div>
+      <p>Капіталізація ринку</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">420 млн+</div>
+      <p>Користувачів криптовалют</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">24/7</div>
+      <p>Безперервна робота ринку</p>
+    </div>
+  </div>
+</section>
+
+<section id="blockchain">
+  <div class="section-header">
+    <h2>Технологія блокчейн</h2>
+    <p>Основа, на якій працюють усі сучасні криптовалюти</p>
+  </div>
+
+  <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; color: var(--muted); font-size: 18px;">
+    <span style="color: var(--accent); font-weight: 600;">Блокчейн</span> — це інноваційна технологія розподіленого реєстру, 
+    яка зберігає дані у вигляді ланцюжка блоків. Кожен блок містить транзакції, 
+    відмітку часу та криптографічне посилання на попередній блок, створюючи безпечний та незмінний ланцюг даних.
+  </p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <h3>Перший блокчейн: Bitcoin (2009)</h3>
+      <p>Сатоші Накамото створив перший блокчейн як основу для Bitcoin. Це була перша реалізація технології розподіленого реєстру.</p>
+    </div>
+    <div class="timeline-item">
+      <h3>Смарт-контракти: Ethereum (2015)</h3>
+      <p>Віталік Бутерін запропонував блокчейн з можливістю виконання смарт-контрактів, що відкрило шлях для DeFi та dApps.</p>
+    </div>
+    <div class="timeline-item">
+      <h3>Proof of Stake та масштабування</h3>
+      <p>З'явилися нові механізми консенсусу (PoS) та рішення для масштабування (шардинг, рішення другого рівня).</p>
+    </div>
+    <div class="timeline-item">
+      <h3>Блокчейн 3.0 та майбутнє</h3>
+      <p>Розвиток міжланцюгової взаємодії, поліпшення конфіденційності та інтеграція з реальним сектором економіки.</p>
+    </div>
+  </div>
+
+  <div class="card-grid" style="margin-top: 50px;">
+    <div class="card">
+      <h3>Proof of Work (PoW)</h3>
+      <p>Майнери вирішують складні математичні задачі для підтвердження транзакцій. Використовується в Bitcoin. Висока безпека, але велике споживання енергії.</p>
+    </div>
+    <div class="card">
+      <h3>Proof of Stake (PoS)</h3>
+      <p>Валідатори блокують свої токени для участі у підтвердженні транзакцій. Енергоефективніший, використовується в Ethereum 2.0, Cardano, Solana.</p>
+    </div>
+    <div class="card">
+      <h3>Делегований PoS (DPoS)</h3>
+      <p>Власники токенів обирають делегатів для підтвердження транзакцій. Використовується в EOS, TRON. Швидкість та масштабованість.</p>
+    </div>
+  </div>
+</section>
+
+<section id="types">
+  <div class="section-header">
+    <h2>Види криптовалют</h2>
+    <p>Класифікація цифрових активів за функціоналом та призначенням</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon"><i class="fab fa-bitcoin"></i></div>
+      <h3>Криптовалюти (Coins)</h3>
+      <p>Нативні активи власних блокчейнів. Bitcoin (BTC), Litecoin (LTC), Monero (XMR). Використовуються як засіб обміну та збереження цінності.</p>
+      <p style="margin-top: 15px; font-size: 14px; color: var(--accent);">Приклади: BTC, LTC, XMR, DOGE</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fab fa-ethereum"></i></div>
+      <h3>Токени платформ</h3>
+      <p>Створені на основі існуючих блокчейнів (ERC-20, BEP-20). Використовуються в конкретних екосистемах для оплати послуг, управління та стейкінгу.</p>
+      <p style="margin-top: 15px; font-size: 14px; color: var(--accent);">Приклади: UNI, LINK, AAVE, CAKE</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-coins"></i></div>
+      <h3>Стейблкоїни</h3>
+      <p>Криптовалюти зі стабільним курсом, прив'язані до фіатних грошей або товарів. Використовуються для торгівлі, збереження капіталу та як засіб обміну.</p>
+      <p style="margin-top: 15px; font-size: 14px; color: var(--accent);">Приклади: USDT, USDC, DAI, BUSD</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
+      <h3>Утилітні токени</h3>
+      <p>Надають доступ до певних послуг або функцій в межах проєкту. Можуть використовуватися для голосування, отримання знижок чи доступу до преміум-функцій.</p>
+      <p style="margin-top: 15px; font-size: 14px; color: var(--accent);">Приклади: BAT, MANA, SAND, CHZ</p>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Криптовалюта</th>
+          <th>Ринкова капіталізація</th>
+          <th>Тип</th>
+          <th>Рік запуску</th>
+          <th>Особливості</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Bitcoin (BTC)</strong></td>
+          <td>$900 млрд</td>
+          <td>Coin</td>
+          <td>2009</td>
+          <td>Перша криптовалюта, цифрове золото</td>
+        </tr>
+        <tr>
+          <td><strong>Ethereum (ETH)</strong></td>
+          <td>$400 млрд</td>
+          <td>Platform</td>
+          <td>2015</td>
+          <td>Смарт-контракти, DeFi, NFT</td>
+        </tr>
+        <tr>
+          <td><strong>Binance Coin (BNB)</strong></td>
+          <td>$85 млрд</td>
+          <td>Utility</td>
+          <td>2017</td>
+          <td>Токен екосистеми Binance</td>
+        </tr>
+        <tr>
+          <td><strong>Cardano (ADA)</strong></td>
+          <td>$45 млрд</td>
+          <td>Platform</td>
+          <td>2017</td>
+          <td>Науковий підхід, Proof of Stake</td>
+        </tr>
+        <tr>
+          <td><strong>Solana (SOL)</strong></td>
+          <td>$38 млрд</td>
+          <td>Platform</td>
+          <td>2020</td>
+          <td>Висока швидкість, низькі комісії</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="defi">
+  <div class="section-header">
+    <h2>Децентралізовані фінанси (DeFi)</h2>
+    <p>Фінансові послуги без посередників на основі блокчейну</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-hand-holding-usd"></i></div>
+      <h3>Децентралізовані позики</h3>
+      <p>Користувачі можуть брати та надавати позики без банків. Протоколи як Aave, Compound автоматизують процес через смарт-контракти.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
+      <h3>DEX (Децентралізовані біржі)</h3>
+      <p>Торгівля криптовалютами без зберігання коштів на біржі. Uniswap, PancakeSwap використовують автоматичні маркет-мейкери (AMM).</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+      <h3>Стейкінг та фармінг</h3>
+      <p>Заробіток на власних криптоактивах через стейкінг (блокування токенів) або yield farming (оптимізація прибутковості в DeFi).</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+      <h3>Страхування</h3>
+      <p>Децентралізоване страхування протоколів DeFi від хакерських атак та помилок у смарт-контрактах через протоколи як Nexus Mutual.</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 50px; text-align: center;">
+    <h3 style="color: var(--accent); margin-bottom: 20px;">Топ DeFi протоколи за TVL (Total Value Locked)</h3>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">$45B</div>
+        <p>Lido Finance</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">$28B</div>
+        <p>MakerDAO</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">$25B</div>
+        <p>Aave</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">$20B</div>
+        <p>Uniswap</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nft">
+  <div class="section-header">
+    <h2>NFT та цифрове мистецтво</h2>
+    <p>Унікальні цифрові активи, що змінюють мистецтво, ігри та колекціонування</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-palette"></i></div>
+      <h3>Цифрове мистецтво</h3>
+      <p>NFT дозволяють художникам продавати унікальні цифрові роботи з підтвердженням авторства та права власності через блокчейн.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-gamepad"></i></div>
+      <h3>Ігрові активи</h3>
+      <p>Унікальні предмети, персонажі та земля в метавсесвітах, які гравець справді володіє та може продати.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-music"></i></div>
+      <h3>Музика та розваги</h3>
+      <p>Музиканти створюють NFT-альбоми, а фан-клуби пропонують ексклюзивний контент через NFT.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-id-card"></i></div>
+      <h3>Цифрові ідентичності</h3>
+      <p>NFT можуть представляти цифрові ідентичності, сертифікати, дипломи або документи з підтвердженою автентичністю.</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 50px; background: rgba(108, 242, 194, 0.05); border-radius: var(--radius); padding: 30px;">
+    <h3 style="color: var(--accent); margin-bottom: 20px;">Відомі NFT продажі</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+      <div>
+        <h4 style="color: var(--text);">Everydays: The First 5000 Days</h4>
+        <p style="color: var(--muted);">Beeple, продано за $69.3 млн на Christie's (2021)</p>
+      </div>
+      <div>
+        <h4 style="color: var(--text);">CryptoPunk #7523</h4>
+        <p style="color: var(--muted);">Продано за $11.8 млн (2021)</p>
+      </div>
+      <div>
+        <h4 style="color: var(--text);">Bored Ape Yacht Club</h4>
+        <p style="color: var(--muted);">Колекція 10,000 NFT, загальний обіг понад $2 млрд</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="start">
+  <div class="section-header">
+    <h2>Як почати роботу з криптовалютою?</h2>
+    <p>Покроковий гід для новачків у світі цифрових активів</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+      <h3>Крок 1: Навчання</h3>
+      <p>Перш ніж інвестувати, вивчіть основи блокчейну, ризики та стратегії. Розуміння > спекуляція.</p>
+      <ul style="margin-top: 15px; padding-left: 20px; color: var(--muted); font-size: 14px;">
+        <li>Білі папери проєктів</li>
+        <li>Технічний аналіз</li>
+        <li>Управління ризиками</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
+      <h3>Крок 2: Вибір платформи</h3>
+      <p>Оберіть надійну криптобіржу (Binance, WhiteBIT, Kuna) або децентралізовану біржу (Uniswap, PancakeSwap).</p>
+      <ul style="margin-top: 15px; padding-left: 20px; color: var(--muted); font-size: 14px;">
+        <li>Верифікація акаунту</li>
+        <li>Двофакторна аутентифікація</li>
+        <li>Комісії та ліміти</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-wallet"></i></div>
+      <h3>Крок 3: Гаманці</h3>
+      <p>Холодні гаманці (Ledger, Trezor) для великих сум, гарячі (Trust Wallet, MetaMask) для невеликих та активних операцій.</p>
+      <ul style="margin-top: 15px; padding-left: 20px; color: var(--muted); font-size: 14px;">
+        <li>Приватні ключі — ваші гроші</li>
+        <li>Seed-фраза — нікому не показувати</li>
+        <li>Резервне копіювання</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+      <h3>Крок 4: Стратегія</h3>
+      <p>Диверсифікація портфеля, DCA (постійні інвестиції), stop-loss ордери, контроль емоцій (FOMO та FUD).</p>
+      <ul style="margin-top: 15px; padding-left: 20px; color: var(--muted); font-size: 14px;">
+        <li>Холд vs Трейдинг</li>
+        <li>Ризик-менеджмент</li>
+        <li>Податки та звітність</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 50px;">
+    <h3 style="color: var(--accent); margin-bottom: 20px;">Рекомендовані ресурси для навчання</h3>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+      <a href="#" class="btn-secondary btn-small"><i class="fas fa-book"></i> Binance Academy</a>
+      <a href="#" class="btn-secondary btn-small"><i class="fas fa-video"></i> CoinBureau</a>
+      <a href="#" class="btn-secondary btn-small"><i class="fas fa-newspaper"></i> Cointelegraph</a>
+      <a href="#" class="btn-secondary btn-small"><i class="fas fa-chart-bar"></i> TradingView</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="section-header">
+    <h2>Поширені запитання (FAQ)</h2>
+    <p>Відповіді на найпоширеніші питання про криптовалюти</p>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <h3>Чи легальні криптовалюти в Україні?</h3>
+        <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="accordion-content">
+        <p>Так, криптовалюти легальні в Україні з 2022 року. Закон "Про віртуальні активи" регулює обіг цифрових активів. Україна є однією з найбільш крипто-дружніх країн світу, з великою кількістю крипто-компаній та високим рівнем adoption.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <h3>Як оподатковуються криптовалюти?</h3>
+        <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="accordion-content">
+        <p>В Україні оподаткування криптовалют становить 18% податку на доходи та 1,5% військового збору. Податок сплачується при продажу криптовалют за фіат або при обміні на інші криптоактиви з прибутком. Трейдери мають подавати декларацію та сплачувати податки щорічно.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <h3>Чи можна втратити всі гроші в крипті?</h3>
+        <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="accordion-content">
+        <p>Так, криптовалюти — це високоризикові інвестиції. Ринок дуже волатильний, можливі зботи на 50% та більше. Також існує ризик втрати коштів через хакерські атаки, втрату приватних ключів або шахрайство. Інвестуйте тільки ті кошти, які готові повністю втратити.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <h3>Що таке майнінг та чи вигідний він зараз?</h3>
+        <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="accordion-content">
+        <p>Майнінг — це процес підтвердження транзакцій та створення нових блоків у блокчейні. Для Bitcoin це вимагає спеціального обладнання (ASIC) та великих витрат на електрику. В Україні майнінг можливий, але потрібно враховувати високі тарифи на електроенергію та можливі регуляторні зміни.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <h3>Як обрати безпечний криптогаманець?</h3>
+        <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="accordion-content">
+        <p>Для великих сум використовуйте апаратні (холодні) гаманці: Ledger, Trezor. Для невеликих сум — програмні гаманці: Trust Wallet, MetaMask. Ніколи не зберігайте великі суми на біржах. Завжди робіть резервні копії seed-фрази та зберігайте її в безпечному місці.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-content">
+    <div class="footer-logo">Crypto<span>Hub</span> UA</div>
+    <p style="color: var(--muted); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Освітній проєкт про криптовалюти та блокчейн технології. Досліджуйте майбутнє фінансів разом з нами.
+    </p>
+
+    <div class="socials">
+      <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+      <a href="#"><i class="fab fa-discord"></i> Discord</a>
+      <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+      <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+      <a href="#"><i class="fab fa-github"></i> GitHub</a>
+    </div>
+
+    <div class="footer-disclaimer">
+      <h3><i class="fas fa-exclamation-triangle"></i> Важлива інформація</h3>
+      <p>
+        <strong>Цей сайт є тестовим демонстраційним проєктом</strong>, створеним виключно для демонстрації можливостей 
+        веб-розробки нашої компанії. Вся представлена інформація про криптовалюти є загальнодоступною та не є фінансовою порадою.
+      </p>
+      <p style="margin-top: 15px;">
+        <strong>Інвестування в криптовалюти пов'язане з високими ризиками.</strong> Перш ніж приймати будь-які рішення, 
+        проконсультуйтесь з фінансовими експертами та проведіть власне дослідження.
+      </p>
+      
+      <div style="margin-top: 25px; text-align: center;">
+        <a href="https://pump.fun/coin/HPWimwLs12M1W7ToHzLh282FtTJyg6HZvyHJJrp7pump" class="btn" target="_blank" style="display: inline-flex; align-items: center; gap: 10px;">
+          <i class="fas fa-rocket"></i> МИ НА ОЛКС
+        </a>
+      </div>
+      
+      <p style="margin-top: 20px; font-size: 14px; color: var(--accent); text-align: center;">
+        <i class="fas fa-code"></i> Сайт створено для демонстрації робіт нашої компанії з веб-розробки.
+      </p>
+    </div>
+
+    <p style="margin-top: 40px;">
+      © 2023 CryptoHub UA. Всі права захищені.<br>
+      Чисте бачення цифрового майбутнього.
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const nav = document.getElementById('nav');
+  
+  mobileMenuBtn.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    mobileMenuBtn.innerHTML = nav.classList.contains('active') 
+      ? '<i class="fas fa-times"></i>' 
+      : '<i class="fas fa-bars"></i>';
+  });
+
+  // Close mobile menu when clicking on a link
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('active');
+      mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    });
+  });
+
+  // Header scroll effect
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Animate elements on scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'fadeUp 0.8s ease forwards';
+      }
+    });
+  }, observerOptions);
+
+  // Observe all sections
+  document.querySelectorAll('section').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Accordion functionality
+  const accordionItems = document.querySelectorAll('.accordion-item');
+  
+  accordionItems.forEach(item => {
+    const header = item.querySelector('.accordion-header');
+    
+    header.addEventListener('click', () => {
+      // Close other open accordion items
+      accordionItems.forEach(otherItem => {
+        if (otherItem !== item && otherItem.classList.contains('active')) {
+          otherItem.classList.remove('active');
+        }
+      });
+      
+      // Toggle current item
+      item.classList.toggle('active');
+    });
+  });
+
+  // Button hover effect enhancement
+  document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-3px)';
+    });
+    
+    button.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0)';
+    });
+  });
+</script>
+</body>
+</html>
