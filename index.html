@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KuponSocial — demo feed</title>
+<meta name="description" content="Синтетический тестовый сайт: лента постов с купонами/картами и QR-кодами, для проверки Card Collector.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">K</div>
+  <div class="name">KuponSocial</div>
+  <div class="tag">demo feed · без регистрации</div>
+</div>
+
+<div class="notice">
+  Это тестовая страница, не настоящая соцсеть. Все посты и QR-коды ниже — синтетические
+  тестовые данные для проверки Card Collector (коды выдуманы, у них нет реальной ценности,
+  по ним ничего не активируется). Бренды и категории — реальные из <code>data/merchants.csv</code>
+  приложения, каждая карточка прошла проверку настоящим детектором приложения перед публикацией.
+</div>
+
+<main class="feed">
+
+  <article class="post">
+    <div class="post-head">
+      <div class="avatar" style="background:#0f7882">ST</div>
+      <div class="who">
+        <span class="u">Splash e Spa Tamaro</span>
+        <span class="meta">@splashtamaro · 2 ч</span>
+      </div>
+      <span class="badge">Tessera</span>
+    </div>
+    <p class="post-caption">Programma fedeltà: raccogli punti fedeltà ad ogni visita e ricevi vantaggi esclusivi riservati ai soci del parco acquatico. 🌊</p>
+    <img class="post-img" src="images/splash_membership.png" alt="Splash e Spa Tamaro — tessera Splash e Spa">
+    <div class="post-actions">
+      <span class="act like"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.5C.5 8.8 2 5 5.8 5c2 0 3.4 1.2 4.2 2.5C10.8 6.2 12.2 5 14.2 5 18 5 19.5 8.8 21.5 12.5 19 16.7 12 21 12 21Z"/></svg> 128</span>
+      <span class="act"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z"/></svg> 9</span>
+    </div>
+  </article>
+
+  <article class="post">
+    <div class="post-head">
+      <div class="avatar" style="background:#96142b">PS</div>
+      <div class="who">
+        <span class="u">Pathé Suisse</span>
+        <span class="meta">@pathesuisse · 5 ч</span>
+      </div>
+      <span class="badge">Buono regalo</span>
+    </div>
+    <p class="post-caption">Regala una serata al cinema: la carta regalo Pathé è valida in tutte le sale della Svizzera romanda. 🎬🎁</p>
+    <img class="post-img" src="images/pathe_giftcard.png" alt="Pathé Suisse — Buono regalo Pathé">
+    <div class="post-actions">
+      <span class="act like"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.5C.5 8.8 2 5 5.8 5c2 0 3.4 1.2 4.2 2.5C10.8 6.2 12.2 5 14.2 5 18 5 19.5 8.8 21.5 12.5 19 16.7 12 21 12 21Z"/></svg> 341</span>
+      <span class="act"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z"/></svg> 27</span>
+    </div>
+  </article>
+
+  <article class="post">
+    <div class="post-head">
+      <div class="avatar" style="background:#149678">ST</div>
+      <div class="who">
+        <span class="u">Splash e Spa Tamaro</span>
+        <span class="meta">@splashtamaro · 1 г</span>
+      </div>
+      <span class="badge">Buono sconto</span>
+    </div>
+    <p class="post-caption">Approfitta del buono sconto: risparmia il 15% sull'accesso giornaliero, offerta in promozione per i soci. 💸</p>
+    <img class="post-img" src="images/splash_coupon.png" alt="Splash e Spa Tamaro — Buoni Splash e Spa, sconto">
+    <div class="post-actions">
+      <span class="act like"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.5C.5 8.8 2 5 5.8 5c2 0 3.4 1.2 4.2 2.5C10.8 6.2 12.2 5 14.2 5 18 5 19.5 8.8 21.5 12.5 19 16.7 12 21 12 21Z"/></svg> 96</span>
+      <span class="act"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z"/></svg> 4</span>
+    </div>
+  </article>
+
+  <article class="post">
+    <div class="post-head">
+      <div class="avatar" style="background:#b4281e">PS</div>
+      <div class="who">
+        <span class="u">Pathé Suisse</span>
+        <span class="meta">@pathesuisse · 1 г</span>
+      </div>
+      <span class="badge">Biglietto</span>
+    </div>
+    <p class="post-caption">Prenota il tuo biglietto per il prossimo film in uscita, ingresso garantito anche nei giorni di grande affluenza. 🍿</p>
+    <img class="post-img" src="images/pathe_ticket.png" alt="Pathé Suisse — Biglietti Pathé">
+    <div class="post-actions">
+      <span class="act like"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.5C.5 8.8 2 5 5.8 5c2 0 3.4 1.2 4.2 2.5C10.8 6.2 12.2 5 14.2 5 18 5 19.5 8.8 21.5 12.5 19 16.7 12 21 12 21Z"/></svg> 212</span>
+      <span class="act"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z"/></svg> 15</span>
+    </div>
+  </article>
+
+  <article class="post">
+    <div class="post-head">
+      <div class="avatar" style="background:#0a6496">ST</div>
+      <div class="who">
+        <span class="u">Splash e Spa Tamaro</span>
+        <span class="meta">@splashtamaro · 2 г</span>
+      </div>
+      <span class="badge">Biglietto</span>
+    </div>
+    <p class="post-caption">Acquista il tuo biglietto d'ingresso online e salta la fila alle casse del parco acquatico. 🎟️</p>
+    <img class="post-img" src="images/splash_ticket.png" alt="Splash e Spa Tamaro — Biglietto ingresso Splash e Spa">
+    <div class="post-actions">
+      <span class="act like"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.5C.5 8.8 2 5 5.8 5c2 0 3.4 1.2 4.2 2.5C10.8 6.2 12.2 5 14.2 5 18 5 19.5 8.8 21.5 12.5 19 16.7 12 21 12 21Z"/></svg> 77</span>
+      <span class="act"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z"/></svg> 3</span>
+    </div>
+  </article>
+
+  <article class="post">
+    <div class="post-head">
+      <div class="avatar" style="background:#1e3caa">BC</div>
+      <div class="who">
+        <span class="u">Blue Cinema</span>
+        <span class="meta">@bluecinema_ch · 3 г</span>
+      </div>
+      <span class="badge">Buono regalo</span>
+    </div>
+    <p class="post-caption">Un'idea regalo perfetta: la carta regalo blue Cinema si può usare per biglietti, popcorn e bibite. 🎁</p>
+    <img class="post-img" src="images/bluecinema_giftcard.png" alt="Blue Cinema — Buono regalo blue Cinema">
+    <div class="post-actions">
+      <span class="act like"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.5C.5 8.8 2 5 5.8 5c2 0 3.4 1.2 4.2 2.5C10.8 6.2 12.2 5 14.2 5 18 5 19.5 8.8 21.5 12.5 19 16.7 12 21 12 21Z"/></svg> 54</span>
+      <span class="act"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z"/></svg> 2</span>
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  KuponSocial · тестовая страница для Card Collector · <a href="README.md">README</a>
+</footer>
+
+</body>
+</html>
